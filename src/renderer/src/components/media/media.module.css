@@ -1,0 +1,14 @@
+.tools {
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+  z-index: 2;
+}
+.tool_button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  box-shadow: 0 0 5px #aaaa;
+  border-radius: 5px;
+  background-color: white;
+}

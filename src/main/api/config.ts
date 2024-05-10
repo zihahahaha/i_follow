@@ -1,0 +1,1 @@
+export const imgs = `F:\/myCode\/project\/Electron\/what_follow\/src\/renderer\/public\/`

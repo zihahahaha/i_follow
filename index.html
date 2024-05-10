@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .block {
+        width: 50px;
+        height: 50px;
+        background-color: gray;
+      }
+
+      .put {
+        width: 200px;
+        height: 200px;
+        border: solid 1px #000;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="block" >aaaaa</span>
+    <input type="text" class="put">
+    <script>
+      document.querySelector('.block').addEventListener('dragstart', (e) => {
+        // e.dataTransfer.effectAllowed = 'copy'
+      })
+      document.querySelector('.block').addEventListener('dragend', (e) => {
+        console.log(e.dataTransfer.dropEffect)
+      })
+
+
+      document.querySelector('.put').addEventListener('dragover', (e) => {
+        e.preventDefault()
+       
+      })
+      document.querySelector('.put').addEventListener('drop', (e) => {
+    
+        e.preventDefault()
+      })
+    </script>
+  </body>
+</html>

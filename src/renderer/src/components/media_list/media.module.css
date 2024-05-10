@@ -1,0 +1,45 @@
+.link {
+  width: var(--width);
+  background-color: white;
+  cursor: pointer;
+  font-size: var(--font_size);
+}
+.link:hover .media_cover {
+  filter: brightness(85%);
+}
+.cover_contain {
+  position: relative;
+  aspect-ratio: 2/3;
+  overflow: hidden;
+}
+.media_cover {
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border: none;
+  width: 30px;
+  color: #aaa;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.button:hover {
+  background-color: #eee;
+  color: #555;
+}
+
+.pos {
+  visibility: hidden;
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+}
+
+.cover_contain:hover .pos {
+  visibility: visible;
+}

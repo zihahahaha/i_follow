@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "exclude": [
+    "./src/test/**/*"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.web.json"
+    }
+  ]
+}

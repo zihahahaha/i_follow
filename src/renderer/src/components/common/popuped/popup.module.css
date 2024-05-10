@@ -1,0 +1,30 @@
+.popup {
+    position: absolute;
+    background-color: white;
+    width: max-content;
+  }
+  .--left {
+    right: 100%;
+  }
+  .--right {
+    left: 100%;
+  }
+  .--m_left {
+    left: 0;
+  }
+  .--m_right {
+    right: 0;
+  }
+  .--top {
+    bottom: 100%;
+  }
+  .--bottom {
+    top: 100%;
+  }
+  .--m_top {
+    top: 0;
+  }
+  .--m_bottom {
+    bottom: 0;
+  }
+  
