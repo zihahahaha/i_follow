@@ -5,3 +5,5 @@ out
 *.log*
 buffer
 src/test
+.vscode
+log.md
