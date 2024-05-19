@@ -1,8 +1,0 @@
-{
-    "include": [
-        "src/share/**/*"
-    ],
-    "compilerOptions": {
-        "composite": true
-    }
-}

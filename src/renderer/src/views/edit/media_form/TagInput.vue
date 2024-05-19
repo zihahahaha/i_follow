@@ -2,7 +2,7 @@
 import { computed, ref, defineComponent, useCssModule } from 'vue'
 import { CloseSharp, OpenOutline } from '@vicons/ionicons5'
 import { debounce } from '@renderer/utils'
-import type { Tag } from '@/type'
+import type { Tag } from 'src/api/type'
 import { scannerOnce, scannerTwice } from '../../../components/scanner'
 import Drawer from '@renderer/components/drawer/Drawer.vue'
 

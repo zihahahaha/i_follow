@@ -1,0 +1,29 @@
+{
+  "references": [
+    {
+      "path": "./tsconfig.api.json"
+    }
+  ],
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "include": [
+    "electron.vite.config.*",
+    "src/main/**/*",
+    "src/api/config.ts",
+    "src/api/data.ts",
+    "src/api/index.ts",
+    "src/api/utils.ts",
+    "src/api/type",
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "types": [
+      "electron-vite/node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": [
+        "src/api/*"
+      ],
+    }
+  }
+}

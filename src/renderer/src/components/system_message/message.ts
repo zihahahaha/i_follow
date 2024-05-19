@@ -1,6 +1,6 @@
 import Message from './Message.vue'
 import Messages from './Messages.vue'
-import { useMessage } from '../common/message'
+import { useMessage } from '../hook/message'
 import { type App, createApp } from 'vue'
 
 

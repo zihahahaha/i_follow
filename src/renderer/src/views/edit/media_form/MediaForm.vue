@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import ImagePreview from './ImagePreview.vue'
 import TagInput from './TagInput.vue'
-import type { Tag } from '@/type'
+import type { Tag } from 'src/api/type'
 import { IdCardOutline } from '@vicons/ionicons5'
 
 const emit = defineEmits<{

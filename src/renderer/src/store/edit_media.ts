@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import type { Tag } from '@/type'
+import type { Tag } from '@node/type'
 import { insertQueue, finish } from './loading'
 import { api } from '@renderer/api/local'
 

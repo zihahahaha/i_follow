@@ -1,19 +1,35 @@
 <script setup lang="ts">
-import { BagHandleSharp, LibrarySharp } from '@vicons/ionicons5'
-import { Save24Filled, SaveEdit24Filled } from '@vicons/fluent'
-import { collectMedia, editMedia } from '@renderer/store'
+import { LibrarySharp } from '@vicons/ionicons5'
+import { Save24Filled, SaveEdit24Filled, ClipboardSearch24Regular } from '@vicons/fluent'
+import Meta from './Meta.vue'
+import Icon from './icon.vue'
+//
+import { useRoute } from 'vue-router'
+import { computed, useCssModule } from 'vue'
+import linkStyle from './link.module.css'
 
+// import MetaSearchLinks from './MetaSearchLinks.vue'
+
+const route = useRoute()
+const $style = useCssModule()
+const metaSearch = computed(() => {
+  if (route.name === 'manager_search_meta' || route.name === 'search_meta') return $style.active
+  else return ''
+})
 </script>
 
 <template>
   <div :class="$style.aside_bar">
-    <RouterLink to="/" :class="$style.link" :active-class="$style.active">
-      <BagHandleSharp />
+    <Icon />
+
+    <Meta />
+
+    <RouterLink to="/collection" :class="linkStyle.link">
+      <LibrarySharp :class="linkStyle.icon" />
+      <div>本地数据</div>
     </RouterLink>
-    <RouterLink to="/collection" :class="$style.link" :active-class="$style.active">
-      <LibrarySharp />
-    </RouterLink>
-    <RouterLink
+
+    <!-- <RouterLink
       v-if="collectMedia.state.value.length > 0 || editMedia.editFlag.value"
       to="/edit"
       :class="[$style.link, $style.edit]"
@@ -24,43 +40,44 @@ import { collectMedia, editMedia } from '@renderer/store'
       </div>
       <Save24Filled v-if="editMedia.editFlag.value && collectMedia.state.value.length > 0" />
       <SaveEdit24Filled v-else />
-    </RouterLink>
+    </RouterLink> -->
   </div>
 </template>
 
 <style module>
 .aside_bar {
-  padding: 0 5px;
+  padding-left: 5px;
+  padding-right: 10px;
   position: fixed;
   left: 0;
   top: 0;
   width: var(--aside);
   height: 100vh;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   z-index: 3;
-  background-color: #fff;
+  background-color: #f5f5f5;
 }
 .link {
-  box-sizing: border-box;
-  border: solid 1px transparent;
+  display: flex;
+
   width: 100%;
-  display: block;
   cursor: pointer;
-  background-color: transparent;
   color: #000;
+  text-decoration: none;
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  gap: 2px;
 }
-.link:hover {
-  border: dotted 1px blue;
-  background-color: rgba(0, 0, 255, 0.1);
+.icon {
+  width: 30px;
+  height: 30px;
+  padding-bottom: 3px;
+  border-radius: 100%;
+  background-color: gray;
 }
-.link:active {
-  color: unset;
-}
-.link:visited {
-  color: unset;
-}
+
 .active {
-  color: blue;
+  color: blue !important;
 }
 
 .edit {
@@ -79,7 +96,5 @@ import { collectMedia, editMedia } from '@renderer/store'
   border-radius: 100%;
   background-color: orange;
   color: #fff;
-}
-.edit_loaded {
 }
 </style>

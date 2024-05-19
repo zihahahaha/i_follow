@@ -1,58 +1,77 @@
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import DiscoverView from '../views/discover/Discover.vue'
-import CollectionView from '../views/collection/Collection.vue'
-import EditView from '../views/edit/Edit.vue'
-import LocalMediaView from '../views/loca_media/LocalMedia.vue'
-import RemoteMediaView from '../views/remote_media/RemoteMedia.vue'
-import ErrorView from '../views/error/Error.vue'
-import style from './transition.module.css'
+import SearchMetaView from '../views/search_meta/SearchMeta.vue'
+import ManagerSearchMetaView from '@renderer/views/manager_search_meta'
+// import MetaView from '../views/meta/Meta.vue'
+
+// import CollectionView from '../views/collection/Collection.vue'
+// import EditView from '../views/edit/Edit.vue'
+// import LocalMediaView from '../views/loca_media/LocalMedia.vue'
+// import ErrorView from '../views/error/Error.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'discover',
-      component: DiscoverView,
+      name: 'search_meta',
+      component: SearchMetaView,
       meta: {
         keepAlive: true,
-        name: DiscoverView.__name
+        name: SearchMetaView.__name
       }
     },
     {
-      path: '/collection',
-      name: 'collection',
-      component: CollectionView,
+      path: '/search_meta/:metaSrcId',
+      name: 'manager_search_meta',
+      component: ManagerSearchMetaView,
       meta: {
         keepAlive: true,
-        name: CollectionView.__name
+        name: ManagerSearchMetaView.__name
       }
-    },
-    {
-      path: '/edit',
-      name: 'edit',
-      component: EditView,
-      meta: {
-        keepAlive: true,
-        name: EditView.__name
-      }
-    },
-    {
-      path: '/remote_media',
-      name: 'remote_media',
-      component: RemoteMediaView
-    },
-    {
-      path: '/local_media',
-      name: 'local_media',
-      component: LocalMediaView
-    },
-    {
-      path: '/error',
-      name: 'error',
-      component: ErrorView
     }
+    // {
+    //   path: '/meta_search',
+    //   name: 'meta_search',
+    //   component: MetaSearchManagerView,
+    //   meta: {
+    //     keepAlive: true,
+    //     name: MetaSearchManagerView.__name
+    //   }
+    // },
+    // {
+    //   path: '/meta',
+    //   name: 'meta',
+    //   component: MetaView
+    // },
+    // {
+    //   path: '/collection',
+    //   name: 'collection',
+    //   component: CollectionView,
+    //   meta: {
+    //     keepAlive: true,
+    //     name: CollectionView.__name
+    //   }
+    // },
+    // {
+    //   path: '/edit',
+    //   name: 'edit',
+    //   component: EditView,
+    //   meta: {
+    //     keepAlive: true,
+    //     name: EditView.__name
+    //   }
+    // },
+    // {
+    //   path: '/local_media',
+    //   name: 'local_media',
+    //   component: LocalMediaView
+    // },
+    // {
+    //   path: '/error',
+    //   name: 'error',
+    //   component: ErrorView
+    // }
   ],
   scrollBehavior(to, from, savedPosition) {
     // if (from === to) return false
@@ -69,46 +88,46 @@ const router = createRouter({
   }
 })
 
-const topLevel = ['discover', 'collection', 'edit']
-export function transition(route: RouteLocationNormalizedLoaded) {
-  console.log(lastRoute?.name)
+// const topLevel = ['discover', 'collection', 'edit']
+// export function transition(route: RouteLocationNormalizedLoaded) {
+//   console.log(lastRoute?.name)
 
-  if (route.name === 'discover' && lastRoute.name === 'remote_media')
-    return {
-      enterFromClass: route?.meta?.enterFromClass,
-      enterActiveClass: route?.meta?.enterActiveClass,
-      leaveToClass: lastRoute?.meta?.leaveToClass,
-      leaveActiveClass: lastRoute?.meta?.leaveActiveClass
-    }
+//   if (route.name === 'discover' && lastRoute.name === 'remote_media')
+//     return {
+//       enterFromClass: route?.meta?.enterFromClass,
+//       enterActiveClass: route?.meta?.enterActiveClass,
+//       leaveToClass: lastRoute?.meta?.leaveToClass,
+//       leaveActiveClass: lastRoute?.meta?.leaveActiveClass
+//     }
 
-  if (route.name === 'remote_media' && lastRoute.name === 'discover')
-    return {
-      enterFromClass: route?.meta?.enterFromClass,
-      enterActiveClass: route?.meta?.enterActiveClass,
-      leaveToClass: lastRoute?.meta?.leaveToClass,
-      leaveActiveClass: lastRoute?.meta?.leaveActiveClass
-    }
-  if (topLevel.includes(route.name as string) && topLevel.includes(lastRoute.name as string))
-    return {
-      enterFromClass: '',
-      enterActiveClass: '',
-      leaveToClass: '',
-      leaveActiveClass: ''
-    }
-  if (lastRoute?.name === undefined)
-    return {
-      enterFromClass: '',
-      enterActiveClass: '',
-      leaveToClass: '',
-      leaveActiveClass: ''
-    }
-  return {
-    enterFromClass: route?.meta?.enterFromClass,
-    enterActiveClass: route?.meta?.enterActiveClass,
-    leaveToClass: lastRoute?.meta?.leaveToClass,
-    leaveActiveClass: lastRoute?.meta?.leaveActiveClass
-  }
-}
+//   if (route.name === 'remote_media' && lastRoute.name === 'discover')
+//     return {
+//       enterFromClass: route?.meta?.enterFromClass,
+//       enterActiveClass: route?.meta?.enterActiveClass,
+//       leaveToClass: lastRoute?.meta?.leaveToClass,
+//       leaveActiveClass: lastRoute?.meta?.leaveActiveClass
+//     }
+//   if (topLevel.includes(route.name as string) && topLevel.includes(lastRoute.name as string))
+//     return {
+//       enterFromClass: '',
+//       enterActiveClass: '',
+//       leaveToClass: '',
+//       leaveActiveClass: ''
+//     }
+//   if (lastRoute?.name === undefined)
+//     return {
+//       enterFromClass: '',
+//       enterActiveClass: '',
+//       leaveToClass: '',
+//       leaveActiveClass: ''
+//     }
+//   return {
+//     enterFromClass: route?.meta?.enterFromClass,
+//     enterActiveClass: route?.meta?.enterActiveClass,
+//     leaveToClass: lastRoute?.meta?.leaveToClass,
+//     leaveActiveClass: lastRoute?.meta?.leaveActiveClass
+//   }
+// }
 
 let lastRoute: RouteLocationNormalizedLoaded
 

@@ -1,0 +1,11 @@
+.button {
+  border: none;
+  background-color: #eff0f3;
+  color: #0d0d0d;
+}
+.button:hover {
+  background-color: #ff8e3c;
+  color: #fff;
+  box-shadow: 0 5px 15px -8px rgba(31, 18, 53, 0.6);
+  transition: all 0.2s;
+}

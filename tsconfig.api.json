@@ -1,0 +1,8 @@
+{
+    "include": [
+        "src/api/**/*"
+    ],
+    "compilerOptions": {
+        "composite": true
+    }
+}

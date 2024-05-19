@@ -1,0 +1,25 @@
+@media screen and (min-width: 1200px) {
+    .container {
+      --width: 175px;
+      --font_size: 16px;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .container {
+      --width: 160px;
+      --font_size: 16px;
+    }
+  }
+  @media screen and (max-width: 760px) {
+    .container {
+      --width: 100px;
+      --font_size: 14px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .container {
+      --width: 85px;
+      --font_size: 12px;
+    }
+  }
+  

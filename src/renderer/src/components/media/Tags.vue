@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { GetMedia } from '@/type'
+import { NamespaceLang } from '@api/type/tag_system'
+import { Tag } from '@api/type/tag_system';
 
 const props = defineProps<{
   media: GetMedia | undefined

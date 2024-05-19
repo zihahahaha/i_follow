@@ -1,9 +1,10 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import type { Search, Get, UploadFiles, Insert, Remove } from '../main/ipc'
+import type { SearchFunc, GetFunc, RemoveFunc, InsertFunc, UploadFilesFunc } from '@api/type'
+import type { LocalSearchResult, LocalGetMedia } from '@api/api'
 
-const search: Search = (filter) => ipcRenderer.invoke('search', filter)
-const get: Get = (id) => ipcRenderer.invoke('get', id)
-const uploadFiles: UploadFiles = (links) => {
+const search: SearchFunc<LocalSearchResult> = (filter) => ipcRenderer.invoke('search', filter)
+const get: GetFunc<LocalGetMedia> = (id) => ipcRenderer.invoke('get', id)
+const uploadFiles: UploadFilesFunc = (links) => {
   let files: string[] = []
   for (let link of links) {
     if (typeof link === 'string') files.push(link)
@@ -11,8 +12,8 @@ const uploadFiles: UploadFiles = (links) => {
   }
   return ipcRenderer.invoke('uploadFiles', files)
 }
-const insert: Insert = (media) => ipcRenderer.invoke('insert', media)
-const remove: Remove = (id) => ipcRenderer.invoke('remove', id)
+const insert: InsertFunc = (media) => ipcRenderer.invoke('insert', media)
+const remove: RemoveFunc = (id) => ipcRenderer.invoke('remove', id)
 
 const api = {
   search,

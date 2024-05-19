@@ -1,10 +1,7 @@
 {
   "references": [
     {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.share.json"
+      "path": "./tsconfig.api.json"
     }
   ],
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
@@ -12,7 +9,7 @@
     "src/renderer/src/env.d.ts",
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.vue",
-    "src/preload/*",
+    "src/preload/*", "buffer/meta", "src/renderer/src/views/manager_search_meta", "src/renderer/src/store", "buffer/search_input",
   ],
   "compilerOptions": {
     "noUnusedParameters": false,
@@ -23,11 +20,8 @@
       "@renderer/*": [
         "src/renderer/src/*"
       ],
-      "@node/*": [
-        "src/main/*"
-      ],
-      "@/*": [
-        "src/share/*"
+      "@api/*": [
+        "src/api/*"
       ],
     }
   }

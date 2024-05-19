@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GetMedia } from '@/type'
+import type { GetMedia } from '@api/type'
 import { view } from '@renderer/components/common/imag_view'
 import { useTags } from '@renderer/components/hook/tags'
 import { toRef } from 'vue'

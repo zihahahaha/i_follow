@@ -9,7 +9,7 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts,.vue --fix",
     "preload": "tsc -b --emitDeclarationOnly --declaration ",
-    "preload:clean":"tsc -b --clean",
+    "preload:clean": "tsc -b --clean",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
@@ -28,6 +28,7 @@
     "@obewds/vue-component-helpers": "^1.1.2",
     "@prisma/client": "^5.12.1",
     "electron-updater": "^6.1.7",
+    "jsdom": "^24.0.0",
     "sqlite3": "^5.1.7",
     "uuid": "^9.0.1",
     "vue-router": "^4.3.0"

@@ -8,7 +8,8 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
-        '@': resolve('src')
+        '@': resolve('src'),
+        '@api': resolve('src/api')
       }
     }
   },
@@ -22,7 +23,8 @@ export default defineConfig({
     resolve: {
       alias: {
         '@renderer': resolve('src/renderer/src'),
-        '@': resolve('src')
+        '@': resolve('src'),
+        '@api': resolve('src/api')
       }
     },
     plugins: [vue(), vueJsx()]

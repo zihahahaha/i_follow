@@ -1,4 +1,4 @@
-import type { GetMedia } from '@/type'
+import type { GetMedia } from "@api/type"
 
 interface BufferMedia extends GetMedia {
   type: string
