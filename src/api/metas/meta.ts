@@ -1,15 +1,7 @@
-import { Tag, Filter, NamespaceLang } from './tag_system'
+import { Tag, Filter, NamespaceLang } from '../type/tag_system'
+import { Page, PageInfo } from '../type/page'
 
 export type Id = number | string
-
-export interface PageInfo {
-  hasNextPage: boolean
-}
-
-export interface Page {
-  page: number
-  perPage: number
-}
 
 export interface Meta {
   srcId: string
@@ -32,11 +24,15 @@ export interface PagedMeta {
   pageInfo: PageInfo
 }
 
-export interface MetaApi {
+export interface MetaSrcInfo {
   id: string
-  url: string
   name: string
+  namespaceLang: NamespaceLang
+  
+  link?: string
+}
+
+export interface MetaSrc extends MetaSrcInfo {
   list: (filter: Filter, page?: Page) => Promise<PagedMeta>
   get: (id: Id) => Promise<Meta | undefined>
-  namespaceLang: () => Promise<NamespaceLang>
 }

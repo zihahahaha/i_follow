@@ -1,8 +1,9 @@
 {
     "include": [
         "src/api/**/*"
-    ],
+, "buffer/type.ts"    ],
     "compilerOptions": {
+        "strict": true,
         "composite": true
     }
 }

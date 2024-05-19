@@ -6,8 +6,8 @@ import * as stream from 'node:stream/promises'
 import { imgs } from './config'
 import { downloadFile } from './utils'
 
-import type { SearchFunc, GetFunc, UploadFilesFunc, RemoveFunc, InsertFunc } from './type'
-import type { SearchMedia, SearchResult, GetMedia } from './type'
+import type { SearchFunc, GetFunc, UploadFilesFunc, RemoveFunc, InsertFunc } from '../../buffer/type'
+import type { SearchMedia, SearchResult, GetMedia } from '../../buffer/type'
 
 const prisma = new PrismaClient()
 

@@ -7,7 +7,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import linkStyle from './link.module.css'
 import cardStyle from '@renderer/components/style/card.module.css'
-import type { Meta, ThinMeta } from '@api/type/meta'
+import type { Meta, ThinMeta } from '@api/metas/meta'
 //
 const props = defineProps<{
   meta: Meta | ThinMeta | undefined

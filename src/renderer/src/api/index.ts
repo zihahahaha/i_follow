@@ -1,25 +1,18 @@
-import type { MetaApi } from '@api/type/meta'
+import type { MetaSrcRegisteredFunc, ListFunc, GetFunc } from '@api/metas'
+import type { MetaSrc, MetaSrcInfo } from '@api/metas/meta'
 
-const apis: {
-  [index: string]: MetaApi
-} = {}
+import state from '@renderer/store/metaSrc'
 
-export function registerMetaSrc(api: MetaApi) {
-  if (apis[api.id]) {
-    throw `${api.id} already registered`
-  } else {
-    apis[api.id] = api
-  }
+export const updateMetaSrc = async () => {
+  console.log(window.api)
+
+  state.metaSrc.value = await window.api.metaSrcRegistered()
 }
 
-export function useMetaSrc(): MetaApi[]
-export function useMetaSrc(id: string): MetaApi | undefined
-export function useMetaSrc(id?: string) {
-  if (id === undefined) return Object.values(apis)
-  else if (apis[id]) return apis[id]
-  else return undefined
+export const list: ListFunc = (srcId, filter, page) => {
+  return window.api.list(srcId, filter, page)
 }
 
-export function metaSrcRegistered() {
-  return Object.keys(apis)
+export const get: GetFunc = (srcId, id) => {
+  return window.api.get(srcId, id)
 }

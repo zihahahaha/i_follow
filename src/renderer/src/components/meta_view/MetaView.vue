@@ -2,7 +2,7 @@
 import Tags from '@renderer/components/tags/Tags.vue'
 import { CloseCircleOutline } from '@vicons/ionicons5'
 //
-import type { Meta } from '@api/type/meta'
+import type { Meta } from '@api/metas/meta'
 import { NamespaceLang } from '@api/type/tag_system'
 import buttonStyle from '@renderer/components/style/button.module.css'
 //

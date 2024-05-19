@@ -1,5 +1,5 @@
-import type { MetaApi, Page, Id, Meta, PagedMeta } from '@api/type/meta'
-import type { Filter, Tag } from '@api/type/tag_system'
+import type { MetaSrc, Id, Meta, PagedMeta } from './meta'
+import type { Filter, Tag } from '../type/tag_system'
 
 class MetaConstructor implements Meta {
   srcId: string
@@ -10,7 +10,7 @@ class MetaConstructor implements Meta {
   description: string
   tags: Tag[] = []
 
-  constructor(srcId: string, data) {
+  constructor(srcId: string, data: any) {
     this.srcId = srcId
     this.id = data.id
     this.title = data.title.native
@@ -95,21 +95,29 @@ query($title: String, $page: Int, $perPage: Int)  {
   }
 }
   `
+const baseUrl = 'https://graphql.anilist.co'
 
-export const Anilist: MetaApi = {
+export const AniList: MetaSrc = {
   id: 'anilist',
   name: 'AniList',
-  url: 'https://graphql.anilist.co',
+  namespaceLang: {
+    title: '标题',
+    startDate: '连载开始',
+    endDate: '连载结束',
+    chapters: '章节数',
+    volumes: '卷数'
+  },
+  link: 'https://anilist.co/home',
 
   // 现在只支持搜索标题，且不支持多标签查询
   // title 搜索undefined与''结果是不一样的
-  async list(filter: Filter, page?: Page) {
+  async list(filter, page) {
     console.log(`${this.name} api:list`, filter, page)
 
     const variables = {
       title: filter.find((e) => e.namespace === 'title' || e.namespace === 'temp')?.value,
-      page: page ? page.page : 10,
-      perPage: page ? page.perPage : 1
+      page: page ? page.page : 1,
+      perPage: page ? page.perPage : 10
     }
 
     const option = {
@@ -124,7 +132,7 @@ export const Anilist: MetaApi = {
       })
     }
 
-    const response = await fetch(this.url, option)
+    const response = await fetch(baseUrl, option)
     if (!response.ok) throw 'error'
     const body = (
       await response.json().catch((err) => {
@@ -149,15 +157,5 @@ export const Anilist: MetaApi = {
 
   async get(id: Id) {
     return undefined
-  },
-
-  async namespaceLang() {
-    return {
-      title: '标题',
-      startDate: '连载开始',
-      endDate: '连载结束',
-      chapters: '章节数',
-      volumes: '卷数'
-    }
   }
 }

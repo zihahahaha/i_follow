@@ -9,7 +9,6 @@ import Dialog from '@renderer/components/dialog/Dialog.vue'
 import MetaView from '@renderer/components/meta_view/MetaView.vue'
 //
 import { ref, watchEffect } from 'vue'
-import { useMetaSrc } from '@renderer/api'
 import { useLoadData } from '@renderer/hook/load_data'
 import { useRouter } from 'vue-router'
 import { assertIsDefined } from '@renderer/utils/assert'
@@ -18,8 +17,10 @@ import { scanner } from '@renderer/utils/scanner'
 import { Filter } from '@api/type/tag_system'
 import cardStyle from '@renderer/components/style/card.module.css'
 import buttonStyle from '@renderer/components/style/button.module.css'
-import type { Meta, ThinMeta } from '@api/type/meta'
+import type { Meta, ThinMeta } from '@api/metas/meta'
 import { useMetaView } from '@renderer/components/meta_view/hook'
+import state from '@renderer/store/metaSrc'
+import { list } from '@renderer/api'
 //
 const props = defineProps<{
   srcId: string
@@ -28,13 +29,13 @@ const props = defineProps<{
 //
 const router = useRouter()
 const { data: items, loadData } = useLoadData<Meta | ThinMeta>()
-const api = useMetaSrc(props.srcId)
-assertIsDefined(api)
+const metaSrc = state.metaSrc.value.find((el) => el.id === props.srcId)
+assertIsDefined(metaSrc)
 //
 const extraFlag = ref(false)
 let page = 1
 let filter: Filter
-function search(input: string) {
+const search = (input: string) => {
   const f = scanner(input)
   if (f instanceof Error) {
     //handle filter error==============
@@ -43,10 +44,8 @@ function search(input: string) {
     filter = f
   }
   page = 1
-  assertIsDefined(api)
   loadData(20, async () => {
-    const res = await api
-      .list(filter, { perPage: 20, page })
+    const res = await list(props.srcId, filter, { perPage: 20, page })
       .then((res) => {
         extraFlag.value = res.pageInfo.hasNextPage
         return res.items
@@ -79,8 +78,7 @@ const wheel = useWheelDownHandler(() => {
   loadData(
     20,
     async () => {
-      const res = await api
-        .list(filter, { perPage: 20, page })
+      const res = await list(props.srcId, filter, { perPage: 20, page })
         .then((res) => {
           extraFlag.value = res.pageInfo.hasNextPage
           return res.items
@@ -113,7 +111,7 @@ function emitToTopbar(e: Event) {
     <div :class="$style.content" @scroll="emitToTopbar" @wheel="wheel">
       <!--  -->
       <Topbar :class="$style.topbar" :height="60" :scrollTop="scrollTop">
-        <div :class="$style.src">{{ api.name }}</div>
+        <div :class="$style.src">{{ metaSrc.name }}</div>
         <InputSearch :input="props.search" @search="handleSearch" />
         <button :class="[$style.button, buttonStyle.button]">
           <Options />

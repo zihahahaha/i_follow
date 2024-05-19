@@ -2,6 +2,10 @@ import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import useIpc from './ipc'
+import { registerMetaSrc } from '@api/metas'
+import { AniList } from '@api/metas/anilist'
+
+registerMetaSrc(AniList)
 
 function createWindow(): void {
   // Create the browser window.

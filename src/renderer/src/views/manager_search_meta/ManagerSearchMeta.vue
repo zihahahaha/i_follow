@@ -2,11 +2,11 @@
 import SearchMetaView from './SearchMetaView.vue'
 //
 import { ref } from 'vue'
-import state from '@renderer/store/search_meta_views'
-import { useMetaSrc } from '@renderer/api'
+import stateMetaViews from '@renderer/store/search_meta_views'
+import stateMetaSrc from '@renderer/store/metaSrc'
 import { assertIsString, assertIsDefined, assertIsOptionString } from '@renderer/utils/assert'
-import { onActivated, watch } from 'vue'
-import { LocationQueryValue, useRoute } from 'vue-router'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 //
 const route = useRoute()
 //
@@ -22,10 +22,10 @@ watch(
     const se = route.query.search
     assertIsOptionString(se)
     search.value = se ? se : ''
-    const api = useMetaSrc(srcId.value)
-    assertIsDefined(api)
-    state.insert({
-      name: api.name,
+    const metaSrc = stateMetaSrc.metaSrc.value.find((el) => el.id == srcId.value)
+    assertIsDefined(metaSrc)
+    stateMetaViews.insert({
+      name: metaSrc.name,
       srcId: srcId.value,
       search: search.value
     })
@@ -37,7 +37,7 @@ watch(
 </script>
 
 <template>
-  <KeepAlive v-for="view in state.views.value">
+  <KeepAlive v-for="view in stateMetaViews.views.value">
     <SearchMetaView v-if="srcId === view.srcId" :srcId="view.srcId" :search="search" />
   </KeepAlive>
 </template>

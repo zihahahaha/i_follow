@@ -3,11 +3,11 @@ import LinkMeta from '@renderer/components/link/LinkMeta.vue'
 import { ArrowCircleRight16Regular } from '@vicons/fluent'
 //
 import { assertIsDefined } from '@renderer/utils/assert'
-import { useMetaSrc } from '@renderer/api'
 import { useLoadData } from '@renderer/hook/load_data'
-import type { ThinMeta, Meta, Id } from '@api/type/meta'
+import type { ThinMeta, Meta, Id } from '@api/metas/meta'
 import type { Filter } from '@api/type/tag_system'
-
+import state from '@renderer/store/metaSrc'
+import { list } from '@renderer/api'
 //
 const props = defineProps<{
   srcId: string
@@ -19,14 +19,12 @@ const emit = defineEmits<{
 }>()
 //
 const { data: items, loadData } = useLoadData<Meta | ThinMeta>()
-const api = useMetaSrc(props.srcId)
-assertIsDefined(api)
+const metaSrc = state.metaSrc.value.find((el) => el.id === props.srcId)
+assertIsDefined(metaSrc)
 //
 function search(filter: Filter) {
-  assertIsDefined(api)
   loadData(10, async () => {
-    const res = await api
-      .list(filter, { perPage: 10, page: 1 })
+    const res = await list(props.srcId, filter, { perPage: 10, page: 1 })
       .then((res) => res.items)
       .catch((err) => {
         //handle err
@@ -50,7 +48,7 @@ function handleTo(meta: Meta | ThinMeta) {
 <template>
   <div :class="$style.src_link">
     <div :class="$style.src">
-      <div :class="$style.src_title">{{ api.name }}</div>
+      <div :class="$style.src_title">{{ metaSrc.name }}</div>
       <button type="button" :class="$style.more_button" @click="emit('toSrc', props.srcId)">
         <ArrowCircleRight16Regular />
       </button>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import type { GetMedia } from 'src/api/type'
+import type { GetMedia } from 'buffer/type'
 import { CaretDownOutline } from '@vicons/ionicons5'
 import Drawer from '../drawer/Drawer.vue'
 

@@ -7,7 +7,7 @@ import Dialog from '@renderer/components/dialog/Dialog.vue'
 import MetaView from '@renderer/components/meta_view/MetaView.vue'
 //
 import { ref } from 'vue'
-import state from '@renderer/store/metaSrc'
+import { metaSrcRegistered } from '@renderer/api'
 import { scanner } from '@renderer/utils/scanner'
 import { useRouter } from 'vue-router'
 import { useMetaView } from '@renderer/components/meta_view/hook'
@@ -66,9 +66,9 @@ function emitToTopbar(e: Event) {
       <!--  -->
       <div :class="$style.meta_src_link">
         <MetaSrcLink
-          v-for="metaSrc in state.metaSrc.value"
+          v-for="id in metaSrcRegistered()"
           ref="metaSrcLinks"
-          :srcId="metaSrc.id"
+          :srcId="id"
           @toSrc="toSrc"
           @view="showMetaView"
           @paramView="processParamView"
