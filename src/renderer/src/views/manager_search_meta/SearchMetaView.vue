@@ -19,8 +19,8 @@ import cardStyle from '@renderer/components/style/card.module.css'
 import buttonStyle from '@renderer/components/style/button.module.css'
 import type { Meta, ThinMeta } from '@api/metas/meta'
 import { useMetaView } from '@renderer/components/meta_view/hook'
-import state from '@renderer/store/metaSrc'
-import { list } from '@renderer/api'
+import state from '@renderer/store/meta_src'
+import { metaSrc as api } from '@renderer/api'
 //
 const props = defineProps<{
   srcId: string
@@ -45,7 +45,8 @@ const search = (input: string) => {
   }
   page = 1
   loadData(20, async () => {
-    const res = await list(props.srcId, filter, { perPage: 20, page })
+    const res = await api
+      .list(props.srcId, filter, { perPage: 20, page })
       .then((res) => {
         extraFlag.value = res.pageInfo.hasNextPage
         return res.items
@@ -78,7 +79,8 @@ const wheel = useWheelDownHandler(() => {
   loadData(
     20,
     async () => {
-      const res = await list(props.srcId, filter, { perPage: 20, page })
+      const res = await api
+        .list(props.srcId, filter, { perPage: 20, page })
         .then((res) => {
           extraFlag.value = res.pageInfo.hasNextPage
           return res.items
@@ -128,7 +130,7 @@ function emitToTopbar(e: Event) {
       </div>
       <!--  -->
       <div :class="[$style.meta_link, cardStyle.container]">
-        <LinkMeta v-for="item in items" :meta="item.item" @to="handleTo(item.item!)" />
+        <LinkMeta v-for="item in items" :data="item.item" @to="handleTo(item.item!)" />
       </div>
       <!--  -->
       <ExtraMessage v-if="!extraFlag" />

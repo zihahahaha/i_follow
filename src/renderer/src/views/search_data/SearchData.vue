@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import Topbar from '@renderer/components/common/topbar'
-import InputSearch from './InputSearch.vue'
-import MetaSrcLink from './MetaSrcLink.vue'
+import InputSearch from '@renderer/components/filters/InputSearch.vue'
+import LinkSearchData from './LinkSearchData.vue'
 import Overlay from '@renderer/components/view/Overlay.vue'
 import Dialog from '@renderer/components/dialog/Dialog.vue'
 import MetaView from '@renderer/components/meta_view/MetaView.vue'
 //
 import { ref } from 'vue'
-import { metaSrcRegistered } from '@renderer/api'
+import state from '@renderer/store/data_src'
 import { scanner } from '@renderer/utils/scanner'
 import { useRouter } from 'vue-router'
 import { useMetaView } from '@renderer/components/meta_view/hook'
@@ -15,7 +15,7 @@ import { useMetaView } from '@renderer/components/meta_view/hook'
 let savedInput: string
 const router = useRouter()
 //
-const metaSrcLinks = ref<InstanceType<typeof MetaSrcLink>[]>([])
+const linkSearchDatas = ref<InstanceType<typeof LinkSearchData>[]>([])
 function search(input: string) {
   const filter = scanner(input)
   if (filter instanceof Error) {
@@ -23,12 +23,12 @@ function search(input: string) {
     return
   }
   savedInput = input
-  metaSrcLinks.value.forEach((el) => {
+  linkSearchDatas.value.forEach((el) => {
     el.search(filter)
   })
 }
 //
-function toSrc(srcId: string) {
+function toSearch(srcId: string) {
   router.push({
     name: 'manager_search_meta',
     params: {
@@ -64,12 +64,12 @@ function emitToTopbar(e: Event) {
         </div>
       </Topbar>
       <!--  -->
-      <div :class="$style.meta_src_link">
-        <MetaSrcLink
-          v-for="id in metaSrcRegistered()"
-          ref="metaSrcLinks"
-          :srcId="id"
-          @toSrc="toSrc"
+      <div :class="$style.data_src_link">
+        <LinkSearchData
+          v-for="dataSrc in state.dataSrc.value"
+          ref="linkSearchDatas"
+          :srcId="dataSrc.id"
+          @toSearch="toSearch"
           @view="showMetaView"
           @paramView="processParamView"
         />
@@ -111,7 +111,7 @@ function emitToTopbar(e: Event) {
   padding: 5px 2px;
 }
 /*  */
-.meta_src_link {
+.data_src_link {
   margin-top: calc(80px + 10px);
 }
 </style>

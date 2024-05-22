@@ -2,10 +2,24 @@ import { contextBridge, ipcRenderer } from 'electron'
 // import type { SearchFunc, GetFunc, RemoveFunc, InsertFunc, UploadFilesFunc } from '@api/type'
 // import type { LocalSearchResult, LocalGetMedia } from '@api/api'
 import type { ListFunc, GetFunc, MetaSrcRegisteredFunc } from '@api/metas'
+import type { DataSrcListFunc, DataSrcRegisteredFunc } from '@api/data'
 
-const list: ListFunc = (srcId, filter) => ipcRenderer.invoke('list', srcId, filter)
-const get: GetFunc = (srcId, id) => ipcRenderer.invoke('get', srcId, id)
-const metaSrcRegistered: MetaSrcRegisteredFunc = () => ipcRenderer.invoke('metaSrcRegistered')
+async function invokeWithError(channel: string, ...args) {
+  const { res, err } = await ipcRenderer.invoke(channel, ...args)
+  if (res) return res
+  else throw err
+}
+
+// ====metaSrc======
+const metaSrcList: ListFunc = (srcId, filter) => invokeWithError('metaSrcList', srcId, filter)
+const metaSrcGet: GetFunc = (srcId, id) => invokeWithError('metaSrcGet', srcId, id)
+const metaSrcRegistered: MetaSrcRegisteredFunc = () => invokeWithError('metaSrcRegistered')
+
+// =======dataSrc=========
+const dataSrcList: DataSrcListFunc = (srcId, filter) =>
+  invokeWithError('dataSrcList', srcId, filter)
+const dataSrcRegistered: DataSrcRegisteredFunc = () => invokeWithError('dataSrcRegistered')
+
 // const uploadFiles: UploadFilesFunc = (links) => {
 //   let files: string[] = []
 //   for (let link of links) {
@@ -18,9 +32,12 @@ const metaSrcRegistered: MetaSrcRegisteredFunc = () => ipcRenderer.invoke('metaS
 // const remove: RemoveFunc = (id) => ipcRenderer.invoke('remove', id)
 
 const api = {
-  list,
-  get,
-  metaSrcRegistered
+  metaSrcList,
+  metaSrcGet,
+  metaSrcRegistered,
+
+  dataSrcList,
+  dataSrcRegistered
   // uploadFiles,
   // insert,
   // remove

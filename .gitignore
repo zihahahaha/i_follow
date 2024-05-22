@@ -6,6 +6,7 @@ out
 buffer
 src/test
 .vscode
-log.md
-index.html
-index.js
+/log.md
+/index.html
+/index.js
+/index.ts

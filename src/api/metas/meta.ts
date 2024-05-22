@@ -1,7 +1,7 @@
 import { Tag, Filter, NamespaceLang } from '../type/tag_system'
-import { Page, PageInfo } from '../type/page'
+import { Page, PageInfo } from '../type/common'
 
-export type Id = number | string
+import type { Id } from '../type/common'
 
 export interface Meta {
   srcId: string
@@ -28,7 +28,7 @@ export interface MetaSrcInfo {
   id: string
   name: string
   namespaceLang: NamespaceLang
-  
+
   link?: string
 }
 

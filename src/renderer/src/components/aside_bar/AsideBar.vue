@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { LibrarySharp } from '@vicons/ionicons5'
 import { Save24Filled, SaveEdit24Filled, ClipboardSearch24Regular } from '@vicons/fluent'
-import Meta from './Meta.vue'
 import Icon from './icon.vue'
+import Meta from './Meta.vue'
+import Data from './Data.vue'
 //
 import { useRoute } from 'vue-router'
 import { computed, useCssModule } from 'vue'
@@ -23,6 +24,8 @@ const metaSearch = computed(() => {
     <Icon />
 
     <Meta />
+
+    <Data />
 
     <RouterLink to="/collection" :class="linkStyle.link">
       <LibrarySharp :class="linkStyle.icon" />

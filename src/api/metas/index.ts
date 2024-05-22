@@ -1,6 +1,6 @@
 import type { Filter } from '../type/tag_system'
-import type { MetaSrc, Id, MetaSrcInfo } from './meta'
-import { Page } from '../type/page'
+import type { MetaSrc, MetaSrcInfo } from './meta'
+import { Page, Id } from '../type/common'
 
 const metaSrcRegistry: {
   [index: string]: MetaSrc
@@ -40,12 +40,12 @@ export type ListFunc = typeof list
 export async function list(srcId: string, filter: Filter, page?: Page) {
   const api = useMetaSrc(srcId)
   if (api) return api.list(filter, page)
-  else throw 'srcId 不存在'
+  else throw 'metaSrcId 不存在'
 }
 
 export type GetFunc = typeof get
 export async function get(srcId: string, id: Id) {
   const api = useMetaSrc(srcId)
   if (api) return api.get(id)
-  else throw 'srcId 不存在'
+  else throw 'metaSrcId 不存在'
 }

@@ -2,6 +2,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import SearchMetaView from '../views/search_meta/SearchMeta.vue'
 import ManagerSearchMetaView from '@renderer/views/manager_search_meta'
+import SearchDataView from '@renderer/views/search_data'
 // import MetaView from '../views/meta/Meta.vue'
 
 // import CollectionView from '../views/collection/Collection.vue'
@@ -28,6 +29,15 @@ const router = createRouter({
       meta: {
         keepAlive: true,
         name: ManagerSearchMetaView.__name
+      }
+    },
+    {
+      path: '/search_data',
+      name: 'search_data',
+      component: SearchDataView,
+      meta: {
+        KeepAlive: true,
+        name: SearchDataView.__name
       }
     }
     // {

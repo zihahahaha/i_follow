@@ -2,15 +2,12 @@
 import Skeleton from '@renderer/components/common/skeleton/Skeleton.vue'
 import SkeletonLink from './SkeletonLink.vue'
 //
-import { TagMultiple20Filled } from '@vicons/fluent'
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import linkStyle from './link.module.css'
 import cardStyle from '@renderer/components/style/card.module.css'
-import type { Meta, ThinMeta } from '@api/metas/meta'
+import type { DataLink } from '@api/data/data'
 //
 const props = defineProps<{
-  data: Meta | ThinMeta | undefined
+  data: DataLink | undefined
 }>()
 const emit = defineEmits<{
   to: []
@@ -19,20 +16,6 @@ const emit = defineEmits<{
 function handleClick() {
   if (props.data) emit('to')
 }
-// const tagged = computed(() => {
-//   return collectMedia.some(props.media!.id, props.src)
-// })
-
-// function to() {
-//   router.push({ path: '/meta', query: { id: props.media?.id, src: props.src } })
-// }
-// async function tag() {
-//   if (tagged.value) {
-//     collectMedia.remove(props.media!.id, props.src)
-//   } else {
-//     collectMedia.insert(props.media!.id, props.src)
-//   }
-// }
 </script>
 
 <template>

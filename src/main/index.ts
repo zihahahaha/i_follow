@@ -4,8 +4,11 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import useIpc from './ipc'
 import { registerMetaSrc } from '@api/metas'
 import { AniList } from '@api/metas/anilist'
+import { registerDataSrc } from '@api/data'
+import { CopyManga } from '@api/data/copymanga'
 
 registerMetaSrc(AniList)
+registerDataSrc(CopyManga)
 
 function createWindow(): void {
   // Create the browser window.

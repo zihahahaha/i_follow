@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import Topbar from '@renderer/components/common/topbar'
-import InputSearch from './InputSearch.vue'
-import MetaSrcLink from './MetaSrcLink.vue'
+import InputSearch from '@renderer/components/filters/InputSearch.vue'
+import LinkSearchMeta from './LinkSearchMeta.vue'
 import Overlay from '@renderer/components/view/Overlay.vue'
 import Dialog from '@renderer/components/dialog/Dialog.vue'
 import MetaView from '@renderer/components/meta_view/MetaView.vue'
 //
 import { ref } from 'vue'
-import state from '@renderer/store/metaSrc'
+import state from '@renderer/store/meta_src'
 import { scanner } from '@renderer/utils/scanner'
 import { useRouter } from 'vue-router'
 import { useMetaView } from '@renderer/components/meta_view/hook'
@@ -15,7 +15,7 @@ import { useMetaView } from '@renderer/components/meta_view/hook'
 let savedInput: string
 const router = useRouter()
 //
-const metaSrcLinks = ref<InstanceType<typeof MetaSrcLink>[]>([])
+const linkSearchMetas = ref<InstanceType<typeof LinkSearchMeta>[]>([])
 function search(input: string) {
   const filter = scanner(input)
   if (filter instanceof Error) {
@@ -23,12 +23,12 @@ function search(input: string) {
     return
   }
   savedInput = input
-  metaSrcLinks.value.forEach((el) => {
+  linkSearchMetas.value.forEach((el) => {
     el.search(filter)
   })
 }
 //
-function toSrc(srcId: string) {
+function toSearch(srcId: string) {
   router.push({
     name: 'manager_search_meta',
     params: {
@@ -65,11 +65,11 @@ function emitToTopbar(e: Event) {
       </Topbar>
       <!--  -->
       <div :class="$style.meta_src_link">
-        <MetaSrcLink
+        <LinkSearchMeta
           v-for="metaSrc in state.metaSrc.value"
-          ref="metaSrcLinks"
+          ref="linkSearchMetas"
           :srcId="metaSrc.id"
-          @toSrc="toSrc"
+          @toSearch="toSearch"
           @view="showMetaView"
           @paramView="processParamView"
         />

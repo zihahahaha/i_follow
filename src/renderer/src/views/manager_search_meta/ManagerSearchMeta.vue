@@ -3,7 +3,7 @@ import SearchMetaView from './SearchMetaView.vue'
 //
 import { ref } from 'vue'
 import stateMetaViews from '@renderer/store/search_meta_views'
-import stateMetaSrc from '@renderer/store/metaSrc'
+import stateMetaSrc from '@renderer/store/meta_src'
 import { assertIsString, assertIsDefined, assertIsOptionString } from '@renderer/utils/assert'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'

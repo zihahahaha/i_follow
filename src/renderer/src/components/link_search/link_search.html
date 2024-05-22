@@ -1,0 +1,11 @@
+<div :class="$style.link_search">
+  <div :class="$style.header">
+    <div :class="$style.title">{{ src.name }}</div>
+    <button type="button" :class="$style.link_search_button" @click="handleToSearch">
+      <ArrowCircleRight16Regular />
+    </button>
+  </div>
+  <div :class="$style.links" v-if="items.length > 0">
+    <LinkItem v-for="item in items" :data="item.item" @to="handleTo(item.item)" />
+  </div>
+</div>

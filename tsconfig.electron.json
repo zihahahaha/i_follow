@@ -8,11 +8,7 @@
   "include": [
     "electron.vite.config.*",
     "src/main/**/*",
-    "src/api/config.ts",
-    "src/api/data.ts",
-    "src/api/index.ts",
-    "src/api/utils.ts",
-    "src/api/type", "src/api/metas/meta.ts", "src/api/downloaders/downloader.ts",
+    "src/api/**/*",
   ],
   "compilerOptions": {
     "composite": true,

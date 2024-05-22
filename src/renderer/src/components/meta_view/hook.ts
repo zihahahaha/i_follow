@@ -1,9 +1,10 @@
-import state from '@renderer/store/metaSrc'
+import state from '@renderer/store/meta_src'
 import { assertIsDefined } from '@renderer/utils/assert'
 import { NamespaceLang } from '@api/type/tag_system'
 import { ref } from 'vue'
-import type { Id, Meta } from '@api/metas/meta'
-import { get } from '@renderer/api'
+import type { Meta } from '@api/metas/meta'
+import type { Id } from '@api/type/common'
+import { metaSrc as api } from '@renderer/api'
 
 export function useMetaView() {
   const loading = ref(false)
@@ -12,7 +13,7 @@ export function useMetaView() {
   const namespaceLang = ref<NamespaceLang>()
   async function processParamView(srcId: string, id: Id) {
     loading.value = true
-    const res = await get(srcId, id).catch((err) => {
+    const res = await api.get(srcId, id).catch((err) => {
       //handle err
       return undefined
     })
